@@ -18,9 +18,21 @@ const Auktion = () => {
 
 	return (
 		<div>
-			<p>Hej från Auktion</p>
-
-			{JSON.stringify(auctions)}
+			<ul>
+				{auctions &&
+					auctions.map((auction) => (
+						<li>
+							<p>{auction.Title}</p>
+							<p>{auction.Description}</p>
+							{/* Split datestring maybe? */}
+							<p>{auction.StartDate}</p>
+							<p>{auction.EndDate}</p>
+							<p>{auction.StartingPrice}</p>
+							<p>{auction.CreatedBy}</p>
+							<hr />
+						</li>
+					))}
+			</ul>
 		</div>
 	);
 };
