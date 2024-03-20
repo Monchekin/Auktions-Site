@@ -1,37 +1,52 @@
 import { useState, useEffect } from 'react';
-const Auktion = () => {
-	const [auctions, setAuctions] = useState(null);
+// import { useParams } from 'react-router-dom';
 
+const Auktion = ({ auction, AuthorizeId }) => {
+	// Tillstånd för att lagra auktionsinformationen
+	const [auctionInfo, setAuctionInfo] = useState(null);
+
+	// const { id } = useParams();
+	// const auction = auctions.find((auction) => auction.AuctionID === id);
+
+	// useEffect-hook för att hämta auktionsinformation när AuthorizeId ändras eller när komponenten monteras
 	useEffect(() => {
-		const getAuctions = () => {
-			fetch('https://auctioneer.azurewebsites.net/auction/j5t')
-				.then((res) => res.json())
-				.then((data) => setAuctions(data));
+		// Funktion för att hämta auktionsinformation
+		const getAuctionInfo = () => {
+			// Hitta den auktion vars ID matchar AuthorizeId
+			const foundAuction = auction.find(
+				(auction) => auction.id === AuthorizeId
+			);
+			// Uppdatera tillståndet med auktionsinformationen
+			setAuctionInfo(foundAuction);
 		};
 
-		getAuctions();
-
-		return () => {
-			// TODO: städa upp här
-		};
-	}, []);
+		// Kör funktionen för att hämta auktionsinformation om AuthorizeId finns
+		if (AuthorizeId) {
+			getAuctionInfo();
+		}
+	}, [AuthorizeId, auction]);
 
 	return (
 		<div>
+			<p>hej!</p>
+			{/* {JSON.stringify(auction)} */}
 			<ul>
-				{auctions &&
-					auctions.map((auction) => (
-						<li>
-							<p>{auction.Title}</p>
-							<p>{auction.Description}</p>
-							{/* Split datestring maybe? */}
-							<p>{auction.StartDate}</p>
-							<p>{auction.EndDate}</p>
-							<p>{auction.StartingPrice}</p>
-							<p>{auction.CreatedBy}</p>
-							<hr />
-						</li>
-					))}
+				{auctionInfo && (
+					<li>
+						<h1>{auctionInfo.Title}</h1>
+						<p>{auctionInfo.Description}</p>
+
+						<p>{auctionInfo.StartDate}</p>
+						<p>{auctionInfo.EndDate}</p>
+						<p>{auctionInfo.StartingPrice}</p>
+						<p>{auctionInfo.CreatedBy}</p>
+						<br />
+						<hr />
+						{JSON.stringify(auctionInfo)}
+						<button> klick</button>
+					</li>
+				)}
+				<li>TEST</li>
 			</ul>
 		</div>
 	);

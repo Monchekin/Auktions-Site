@@ -12,3 +12,12 @@
 ul {
 	list-style: none;
 }
+
+.font-serif {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	font-style: italic;
+	font-weight: bolder;
+	text-decoration: underline;
+}
