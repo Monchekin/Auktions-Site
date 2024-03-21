@@ -2,16 +2,21 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const Auktion = () => {
+	// Hämta den aktuella rutans plats från react-router
 	const location = useLocation();
+	// Hämta auktionen från den aktuella rutans state
 	const auctionFromLocationState = location.state.auction;
 
 	// Tillstånd för att lagra auktionsinformationen
 	const [auctionInfo, setAuctionInfo] = useState(null);
 
 	useEffect(() => {
+		// Kontrollera om det finns en auktion i state från platsen
 		if (auctionFromLocationState) {
+			// Om auktionen finns, uppdatera auktionsinformationen i state
 			setAuctionInfo(auctionFromLocationState);
 		} else {
+			// Om ingen auktion finns i state, logga ett felmeddelande
 			console.log(
 				'useLocation har inget state, således fungerar inte navigateToAuctionRoute korrekt.'
 			);
@@ -20,18 +25,35 @@ const Auktion = () => {
 
 	return (
 		<div>
-			{/* Om auctionInfo är sant (inte null eller undefined) renderas följande:*/}
+			{/* Rendera auktionsinformationen om den finns */}
 			{auctionInfo ? (
 				<div style={{ marginTop: '5vh' }}>
-					<h1>{auctionInfo.Title}</h1>
+					<h2>
+						<b>
+							<u>{auctionInfo.Title}</u>
+						</b>
+					</h2>
+					<p>
+						<b>Description: </b>
+					</p>
 					<p>{auctionInfo.Description}</p>
-					<p>{auctionInfo.StartDate}</p>
-					<p>{auctionInfo.EndDate}</p>
-					<p>{auctionInfo.StartingPrice}</p>
-					<p>{auctionInfo.CreatedBy}</p>
+					<p>
+						<b>Start dete:</b> {auctionInfo.StartDate}
+					</p>
+					<p>
+						<b>End date: </b>
+						{auctionInfo.EndDate}
+					</p>
+					<p>
+						<b>Starting Price: </b>
+						{auctionInfo.StartingPrice} kr
+					</p>
+					<p>
+						<b>Created By:</b> {auctionInfo.CreatedBy}
+					</p>
 				</div>
 			) : (
-				// Om auctionInfo inte är falskt (null eller undefined) renderas följande:
+				// Visa meddelande om att auktionen inte kunde hittas
 				<p>Auktionen kunde inte hittas.</p>
 			)}
 		</div>

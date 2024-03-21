@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 const Home = ({ auctions, setAuctions }) => {
 	const navigate = useNavigate();
 
+	// Hämta auktioner från servern när komponenten monteras
 	useEffect(() => {
-		// Funktion för att hämta auktioner från servern
 		const getAuctions = () => {
 			fetch('https://auctioneer.azurewebsites.net/auction/j5t')
 				.then((res) => {
@@ -15,13 +15,11 @@ const Home = ({ auctions, setAuctions }) => {
 					return res.json();
 				})
 				.then((data) => {
-					console.log(data);
 					setAuctions(data);
 				})
-				.catch((error) => console.error('Error fetching auctions:', error)); // Konsollogga eventuella fel utan att försöka komma åt data
+				.catch((error) => console.error('Error fetching auctions:', error));
 		};
 
-		// Anropa funktionen för att hämta auktioner när komponenten monteras
 		getAuctions();
 	}, []);
 
@@ -33,20 +31,24 @@ const Home = ({ auctions, setAuctions }) => {
 	return (
 		<div>
 			<ul>
+				{/* Kolla om auktioner finns tillgängliga */}
 				{auctions ? (
+					// Om auktioner finns, mappa genom varje auktion och skapa en listpunkt
 					auctions.map((auction) => (
 						<li
 							key={auction.AuctionID}
 							onClick={() => navigateToAuctionRoute(auction)}>
 							<hr />
 							<br />
-							<p>'ID i demo syfte:'' {auction.AuctionID}</p>
-							<p>{auction.Title}</p>
+							<p>
+								<b>{auction.Title}</b>
+							</p>
 							<p>{auction.StartingPrice}</p>
 							<br />
 						</li>
 					))
 				) : (
+					// Om inga auktioner finns, visa ett laddningsmeddelande
 					<p>Laddar...</p>
 				)}
 			</ul>
