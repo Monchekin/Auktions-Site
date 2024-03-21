@@ -8,7 +8,7 @@ import Contact from './components/Contact';
 
 function App() {
 	const [auctions, setAuctions] = useState(null);
-	const [auctionInfo, setAuctionInfo] = useState(null);
+	
 	return (
 		<>
 			<h1 className='text-3xl font-bold underline'>Auktion</h1>
@@ -35,10 +35,7 @@ function App() {
 				/>
 				{/* TODO: Hur skicka en auction istället för alla här. Användaren klickar på en auktion och då har jag id, titel, beskrivning etc. Kolla på react-router dynamic ID alternativt onClick */}
 
-				<Route
-					path='/auktion/:id'
-					element={<Auktion auctions={auctions} setAuctions={setAuctions} />}
-				/>
+				<Route path='/auktion/:id' element={<Auktion auctions={auctions} />} />
 
 				<Route path='/buy' element={<Buy />} />
 				<Route path='/sell' element={<Sell />} />
