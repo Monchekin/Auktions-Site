@@ -20,7 +20,7 @@ function App() {
 			</Routes>
 
 			<hr />
-			<ul class='font-serif'>
+			<ul className='font-serif'>
 				<li>
 					<NavLink to='/'>Home</NavLink>
 				</li>
