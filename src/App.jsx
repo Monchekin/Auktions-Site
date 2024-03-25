@@ -11,7 +11,17 @@ function App() {
 
 	return (
 		<>
-			<h1 className='text-3xl font-bold underline'>Auktion</h1>
+			<h1 className='text-3xl font-bold underline'>JENSENS Auktion</h1>
+
+			<Routes>
+				<Route path='/' element={<Home />} />
+				<Route path='/auktion' element={<Auktion />} />
+				<Route path='/buy' element={<Buy />} />
+				<Route path='/sell' element={<Sell />} />
+				<Route path='/contact' element={<Contact />} />
+			</Routes>
+
+			<hr />
 			<ul className='font-serif'>
 				<li>
 					<NavLink to='/'>All Auktion</NavLink>
