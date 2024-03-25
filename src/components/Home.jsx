@@ -28,6 +28,11 @@ const Home = ({ auctions, setAuctions }) => {
 		navigate(`/auktion/${auction.AuctionID}`, { state: { auction: auction } });
 	};
 
+	// const formatDate = (dateString) => {
+	// 	const date = new Date(dateString);
+	// 	return date.toLocaleDateString('sv-SE');
+	// };
+
 	return (
 		<div>
 			<ul>
@@ -41,9 +46,18 @@ const Home = ({ auctions, setAuctions }) => {
 							<hr />
 							<br />
 							<p>
-								<b>{auction.Title}</b>
+								<b>
+									<u>{auction.Title}</u>
+								</b>
 							</p>
-							<p>{auction.StartingPrice}</p>
+							<p>
+								<b>Starting Price: </b>
+								{auction.StartingPrice} kr
+							</p>
+							<p>
+								<b>End date: </b>
+								{auction.EndDate}
+							</p>
 							<br />
 						</li>
 					))
