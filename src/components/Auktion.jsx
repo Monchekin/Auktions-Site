@@ -23,6 +23,8 @@ const Auktion = () => {
 		}
 	}, []);
 
+	
+
 	return (
 		<div>
 			{/* Rendera auktionsinformationen om den finns */}
