@@ -51,27 +51,27 @@ const Auktion = () => {
 						</b>
 					</h2>
 					<p>
-						<b>Description: </b>
+						<b>Beskrivning: </b>
 					</p>
 					<p>{auctionInfo.Description}</p>
 
 					<p>
-						<b>Start date: </b>
+						<b>Startdatum: </b>
 						{new Date(auctionInfo.StartDate).toLocaleDateString('sv-SE')}
 					</p>
 
 					<p>
-						<b>End date: </b>
+						<b>Slutdatum: </b>
 						{new Date(auctionInfo.EndDate).toLocaleDateString('sv-SE')}
 					</p>
 
 					<p>
-						<b>Starting Price: </b>
+						<b>Startpris: </b>
 						{auctionInfo.StartingPrice} kr
 					</p>
 
 					<p>
-						<b>Created By:</b> {auctionInfo.CreatedBy}
+						<b>Skapad av:</b> {auctionInfo.CreatedBy}
 					</p>
 
 					<button onClick={() => handleBidButtonClick(auctionInfo.AuctionID)}>
