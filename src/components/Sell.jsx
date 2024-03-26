@@ -8,6 +8,7 @@ const Sell = () => {
 	const [StartingPrice, setStartingPrice] = useState('');
 	const [CreatedBy, setCreatedBy] = useState('');
 	const [message, setMessage] = useState(''); // Tillståndsvariabel för meddelandet
+	const [formError, setFormError] = useState('');
 
 	const resetAuction = () => {
 		setTitle('');
@@ -21,6 +22,12 @@ const Sell = () => {
 	const handleSellSubmit = async (event) => {
 		event.preventDefault();
 		try {
+			// Validera formulärdata innan du skickar till servern
+			if (!Title || !Description || !StartDate || !EndDate || !StartingPrice || !CreatedBy) {
+				setFormError('Fyll i alla fält i formuläret');
+				return;
+			}
+
 			const response = await fetch(
 				'https://auctioneer.azurewebsites.net/auction/j5t',
 				{
@@ -71,7 +78,7 @@ const Sell = () => {
 				required
 			/>
 			<br />
-			<label htmlFor='startDate'>Startdatum (åååå-mm-dd):</label>
+			<label htmlFor='startDate'>Startdatum :</label>
 			<input
 				type='date'
 				id='startDate'
@@ -80,7 +87,7 @@ const Sell = () => {
 				required
 			/>
 			<br />
-			<label htmlFor='endDate'>Slutdatum (åååå-mm-dd):</label>
+			<label htmlFor='endDate'>Slutdatum :</label>
 			<input
 				type='date'
 				id='endDate'
@@ -108,6 +115,7 @@ const Sell = () => {
 			/>
 			<br />
 			<button onClick={handleSellSubmit}>Lägg till auktion</button>
+			{formError && <p style={{ color: 'red' }}>{formError}</p>} {/* Visa felmeddelande om formuläret är ogiltigt */}
 			{message && <p>{message}</p>} {/* Visa meddelandet om det finns */}
 		</div>
 	);
