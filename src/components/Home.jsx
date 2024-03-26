@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
 
 const Home = ({ auctions, setAuctions }) => {
 	const navigate = useNavigate();
@@ -40,38 +41,49 @@ const Home = ({ auctions, setAuctions }) => {
 	};
 
 	return (
-		<div>
-			<ul>
-				{/* Kolla om auktioner finns tillgängliga */}
-				{auctions ? (
-					// Om auktioner finns, mappa genom varje auktion och skapa en listpunkt
-					auctions.map((auction) => (
-						<li
-							key={auction.AuctionID}
-							onClick={() => navigateToAuctionRoute(auction)}>
-							<hr />
-							<br />
-							<p>
-								<b>
-									<u>{auction.Title}</u>
-								</b>
-							</p>
-							<p>
-								<b>Starting Price: </b>
-								{auction.StartingPrice} kr
-							</p>
-							<p>
-								<b>End date: </b>
-								{formatDate(auction.EndDate)}
-							</p>
-							<br />
-						</li>
-					))
-				) : (
-					// Om inga auktioner finns, visa ett laddningsmeddelande
-					<p>Laddar...</p>
-				)}
-			</ul>
+		<div
+			style={{
+				display: 'grid',
+				gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+				gap: '1rem',
+				marginTop: '2vw'
+			}}>
+			{auctions ? (
+				auctions.map((auction) => (
+					<Card
+						key={auction.AuctionID}
+						onClick={() => navigateToAuctionRoute(auction)}
+						style={{
+							cursor: 'pointer',
+							display: 'flex',
+							flexDirection: 'row',
+							backgroundColor: 'lightgray'
+						}}>
+						<Card.Body>
+							<Card.Title>
+								<p>
+									<b>
+										<u>{auction.Title}</u>
+									</b>
+								</p>
+							</Card.Title>
+							<Card.Text>
+								<h1>{auction.Titel}</h1>
+								<p>
+									<b>Startpris: </b>
+									{auction.StartingPrice} kr
+								</p>
+								<p>
+									<b>Slutdatum: </b>
+									{formatDate(auction.EndDate)}
+								</p>
+							</Card.Text>
+						</Card.Body>
+					</Card>
+				))
+			) : (
+				<h1 style={{ textAlign: 'center' }}>Laddar...</h1>
+			)}
 		</div>
 	);
 };

@@ -1,28 +1,34 @@
 import { useState } from 'react';
+import { Nav } from 'react-bootstrap';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import Home from './components/Home';
 import Auktion from './components/Auktion';
 import Sell from './components/Sell';
-import Contact from './components/Contact';
 
 function App() {
 	const [auctions, setAuctions] = useState(null);
 
 	return (
 		<>
-			<h1 className='text-3xl font-bold underline'> Auktion</h1>
+			<h1
+				className='text-3xl font-bold underline'
+				style={{ marginBottom: '5%' }}>
+				{' '}
+				<u>Auktion.se</u>
+			</h1>
 
-			<ul className='font-serif'>
-				<li>
-					<NavLink to='/'>All Auktion</NavLink>
-				</li>
-				<li>
-					<NavLink to='Sell'>New Auction</NavLink>
-				</li>
-				<li>
-					<NavLink to='Contact'>Contact</NavLink>
-				</li>
-			</ul>
+			<Nav variant='tabs' defaultActiveKey='/' style={{ marginLeft: '25%' }}>
+				<Nav.Item>
+					<Nav.Link as={NavLink} to='/' activeClassName='active' exact>
+						Alla Auktioner
+					</Nav.Link>
+				</Nav.Item>
+				<Nav.Item>
+					<Nav.Link as={NavLink} to='/sell' activeClassName='active'>
+						Lägg till ny Auktion
+					</Nav.Link>
+				</Nav.Item>
+			</Nav>
 
 			<Routes>
 				<Route
@@ -31,9 +37,7 @@ function App() {
 				/>
 				<Route path='/auktion/:id' element={<Auktion auctions={auctions} />} />
 				<Route path='/sell' element={<Sell />} />
-				<Route path='/contact' element={<Contact />} />
 			</Routes>
-
 		</>
 	);
 }
