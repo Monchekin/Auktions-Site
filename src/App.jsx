@@ -10,17 +10,17 @@ function App() {
 
 	return (
 		<>
-			<h1 className='text-3xl font-bold underline'> Auktion</h1>
+			<h1 className='text-3xl font-bold underline'>Auktion.se</h1>
 
 			<ul className='font-serif'>
 				<li>
-					<NavLink to='/'>All Auktion</NavLink>
+					<NavLink to='/'>Alla Auktioner</NavLink>
 				</li>
 				<li>
-					<NavLink to='Sell'>New Auction</NavLink>
+					<NavLink to='Sell'>Lägg till ny Auktion</NavLink>
 				</li>
 				<li>
-					<NavLink to='Contact'>Contact</NavLink>
+					<NavLink to='Contact'>Kontakt</NavLink>
 				</li>
 			</ul>
 
@@ -33,7 +33,6 @@ function App() {
 				<Route path='/sell' element={<Sell />} />
 				<Route path='/contact' element={<Contact />} />
 			</Routes>
-
 		</>
 	);
 }

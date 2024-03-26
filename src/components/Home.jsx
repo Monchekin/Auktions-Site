@@ -57,11 +57,11 @@ const Home = ({ auctions, setAuctions }) => {
 								</b>
 							</p>
 							<p>
-								<b>Starting Price: </b>
+								<b>Startpris: </b>
 								{auction.StartingPrice} kr
 							</p>
 							<p>
-								<b>End date: </b>
+								<b>Slutdatum: </b>
 								{formatDate(auction.EndDate)}
 							</p>
 							<br />
