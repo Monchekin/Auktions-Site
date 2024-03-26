@@ -25,13 +25,19 @@ const Home = ({ auctions, setAuctions }) => {
 
 	// Funktion för att navigera till auktionssidan när en auktion klickas på
 	const navigateToAuctionRoute = (auction) => {
-		navigate(`/auktion/${auction.AuctionID}`, { state: { auction: auction } });
+		navigate(`/auktion/${auction.AuctionID}`, {
+			state: {
+				auction: auction,
+				startDate: new Date(auction.startDate),
+				endDate: new Date(auction.endDate)
+			}
+		});
 	};
 
-	// const formatDate = (dateString) => {
-	// 	const date = new Date(dateString);
-	// 	return date.toLocaleDateString('sv-SE');
-	// };
+	const formatDate = (dateString) => {
+		const date = new Date(dateString);
+		return date.toLocaleDateString('sv-SE');
+	};
 
 	return (
 		<div>
@@ -56,7 +62,7 @@ const Home = ({ auctions, setAuctions }) => {
 							</p>
 							<p>
 								<b>End date: </b>
-								{auction.EndDate}
+								{formatDate(auction.EndDate)}
 							</p>
 							<br />
 						</li>
