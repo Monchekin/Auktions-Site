@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Card, Form, Button } from 'react-bootstrap';
 
 const Sell = () => {
 	const [Title, setTitle] = useState('');
@@ -23,7 +24,14 @@ const Sell = () => {
 		event.preventDefault();
 		try {
 			// Validera formulärdata innan du skickar till servern
-			if (!Title || !Description || !StartDate || !EndDate || !StartingPrice || !CreatedBy) {
+			if (
+				!Title ||
+				!Description ||
+				!StartDate ||
+				!EndDate ||
+				!StartingPrice ||
+				!CreatedBy
+			) {
 				setFormError('Fyll i alla fält i formuläret');
 				return;
 			}
@@ -58,65 +66,89 @@ const Sell = () => {
 	};
 
 	return (
-		<div>
-			<h2>Lägg till ny auktion</h2>
-			<label htmlFor='title'>Titel:</label>
-			<input
-				type='text'
-				id='title'
-				value={Title}
-				onChange={(e) => setTitle(e.target.value)}
-				required
-			/>{' '}
-			<br />
-			<label htmlFor='description'>Beskrivning:</label>
-			<input
-				type='text'
-				id='description'
-				value={Description}
-				onChange={(e) => setDescription(e.target.value)}
-				required
-			/>
-			<br />
-			<label htmlFor='startDate'>Startdatum :</label>
-			<input
-				type='date'
-				id='startDate'
-				value={StartDate}
-				onChange={(e) => setStartDate(e.target.value)}
-				required
-			/>
-			<br />
-			<label htmlFor='endDate'>Slutdatum :</label>
-			<input
-				type='date'
-				id='endDate'
-				value={EndDate}
-				onChange={(e) => setEndDate(e.target.value)}
-				required
-			/>
-			<br />
-			<label htmlFor='startingPrice'>Startpris:</label>
-			<input
-				type='number'
-				id='startingPrice'
-				value={StartingPrice}
-				onChange={(e) => setStartingPrice(e.target.value)}
-				required
-			/>
-			<br />
-			<label htmlFor='createdBy'>Skapad av:</label>
-			<input
-				type='text'
-				id='createdBy'
-				value={CreatedBy}
-				onChange={(e) => setCreatedBy(e.target.value)}
-				required
-			/>
-			<br />
-			<button onClick={handleSellSubmit}>Lägg till auktion</button>
-			{formError && <p style={{ color: 'red' }}>{formError}</p>} {/* Visa felmeddelande om formuläret är ogiltigt */}
-			{message && <p>{message}</p>} {/* Visa meddelandet om det finns */}
+		<div
+			style={{
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+				height: '100vh'
+			}}>
+			<Card
+				style={{
+					width: '50%',
+					backgroundColor: 'rgb(209, 189, 185)'
+				}}>
+				<Card.Body>
+					<Card.Title>Lägg till din auktion</Card.Title>
+					<Form>
+						<Form.Group className='mb-3'>
+							<Form.Label className='Lable'>Titel:</Form.Label>
+							<Form.Control
+								type='text'
+								id='title'
+								value={Title}
+								onChange={(e) => setTitle(e.target.value)}
+								required
+							/>{' '}
+						</Form.Group>
+						<Form.Group className='mb-3'>
+							<Form.Label className='Lable'>Beskrivning:</Form.Label>
+							<Form.Control
+								as='textarea'
+								id='description'
+								rows={3}
+								value={Description}
+								onChange={(e) => setDescription(e.target.value)}
+								required
+							/>
+						</Form.Group>
+						<Form.Group className='mb-3'>
+							<Form.Label className='Lable'>Startdatum:</Form.Label>
+							<Form.Control
+								type='date'
+								id='startDate'
+								value={StartDate}
+								onChange={(e) => setStartDate(e.target.value)}
+								required
+							/>
+						</Form.Group>
+						<Form.Group className='mb-3'>
+							<Form.Label className='Lable'>Slutdatum:</Form.Label>
+							<Form.Control
+								type='date'
+								id='endDate'
+								value={EndDate}
+								onChange={(e) => setEndDate(e.target.value)}
+								required
+							/>
+						</Form.Group>
+						<Form.Group className='mb-3'>
+							<Form.Label className='Lable'>Startpris:</Form.Label>
+							<Form.Control
+								type='number'
+								id='startingPrice'
+								value={StartingPrice}
+								onChange={(e) => setStartingPrice(e.target.value)}
+								required
+							/>
+						</Form.Group>
+						<Form.Group className='mb-3'>
+							<Form.Label className='Lable'>Skapad av:</Form.Label>
+							<Form.Control
+								type='text'
+								id='createdBy'
+								value={CreatedBy}
+								onChange={(e) => setCreatedBy(e.target.value)}
+								required
+							/>
+						</Form.Group>
+						<Button onClick={handleSellSubmit}>Lägg till auktion</Button>
+						{formError && <p style={{ color: 'red' }}>{formError}</p>}{' '}
+						{/* Visa felmeddelande om formuläret är ogiltigt */}
+						{message && { message }} {/* Visa meddelandet om det finns */}
+					</Form>
+				</Card.Body>
+			</Card>
 		</div>
 	);
 };

@@ -9,19 +9,17 @@ ul {
 	list-style: none;
 }
 
-.font-serif {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	font-style: italic;
+.Lable {
+	float: left;
 	font-weight: bolder;
-	text-decoration: underline;
 }
 
-button {
-	border: 1px solid black;
-	padding: 3px;
+.cardText {
+	margin-bottom: 0;
+	margin-top: 5%;
+	margin-right: 63%;
 }
-input {
-	border: 1px solid black;
+
+.nav-link {
+	color: black;
 }
