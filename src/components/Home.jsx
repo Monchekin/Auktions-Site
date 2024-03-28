@@ -43,47 +43,77 @@ const Home = ({ auctions, setAuctions }) => {
 	return (
 		<div
 			style={{
-				display: 'grid',
-				gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+				display: 'flex',
+				flexWrap: 'wrap',
 				gap: '1rem',
 				marginTop: '2vw'
 			}}>
-			{auctions ? (
-				auctions.map((auction) => (
-					<Card
-						key={auction.AuctionID}
-						onClick={() => navigateToAuctionRoute(auction)}
-						style={{
-							cursor: 'pointer',
-							display: 'flex',
-							flexDirection: 'row',
-							backgroundColor: 'lightgray'
-						}}>
-						<Card.Body>
-							<Card.Title>
-								<p>
-									<b>
-										<u>{auction.Title}</u>
-									</b>
-								</p>
-							</Card.Title>
-							<Card.Text>
-								<h1>{auction.Titel}</h1>
-								<p>
-									<b>Startpris: </b>
-									{auction.StartingPrice} kr
-								</p>
-								<p>
-									<b>Slutdatum: </b>
-									{formatDate(auction.EndDate)}
-								</p>
-							</Card.Text>
-						</Card.Body>
-					</Card>
-				))
-			) : (
-				<h1 style={{ textAlign: 'center' }}>Laddar...</h1>
-			)}
+			<div
+				style={{
+					display: 'flex',
+					flexWrap: 'wrap',
+					gap: '1rem',
+					width: 'calc(80% - 1rem)' // 75% av bredden för att ha 3 kort bredvid varandra med en rems gap
+				}}>
+				{auctions ? (
+					auctions.map((auction) => (
+						<Card
+							key={auction.AuctionID}
+							onClick={() => navigateToAuctionRoute(auction)}
+							style={{
+								cursor: 'pointer',
+								backgroundColor: 'rgb(209, 189, 185)',
+								minWidth: '300px',
+								flexBasis: '300px'
+							}}>
+							<Card.Body>
+								<Card.Title>
+									<p>
+										<b>
+											<u>{auction.Title}</u>
+										</b>
+									</p>
+								</Card.Title>
+								<Card.Text>
+									<span>{auction.Titel}</span>
+									<span>
+										<b>Startpris: </b>
+										<span
+											style={{ color: 'darkred', textDecoration: 'underline' }}>
+											{auction.StartingPrice} kr
+										</span>
+									</span>
+									<br />
+									<span>
+										<b>Slutdatum: </b>
+										{formatDate(auction.EndDate)}
+									</span>
+								</Card.Text>
+							</Card.Body>
+						</Card>
+					))
+				) : (
+					<h1 style={{ marginLeft: '110%' }}>Laddar...</h1>
+				)}
+			</div>
+			<div
+				style={{
+					width: 'calc(20% - 1rem)'
+				}}>
+				<Card
+					style={{
+						backgroundColor: 'lightgray',
+						minWidth: '300px',
+						flexBasis: '100%'
+					}}>
+					<Card.Body>
+						<Card.Title>
+							<h5>Klara auktioner:</h5>
+							<Card.Text></Card.Text>
+						</Card.Title>
+					</Card.Body>
+				</Card>
+			</div>
 		</div>
 	);
 };

@@ -7,29 +7,37 @@ import Sell from './components/Sell';
 
 function App() {
 	const [auctions, setAuctions] = useState(null);
+	const [activeTab, setActiveTab] = useState('/');
 
 	return (
 		<>
 			<h1
 				className='text-3xl font-bold underline'
-				style={{ marginBottom: '5%' }}>
+				style={{ marginBottom: '3%' }}>
 				{' '}
-				<u>Auktion.se</u>
+				<u>Det bästa Auktionerna.se</u>
 			</h1>
 
-			<Nav variant='tabs' defaultActiveKey='/' style={{ marginLeft: '25%' }}>
-				<Nav.Item>
-					<Nav.Link as={NavLink} to='/' activeClassName='active' exact>
+			<Nav variant='tabs' defaultActiveKey='/' style={{ marginLeft: '35%' }}>
+				<Nav.Item style={{ color: 'black' }}>
+					<Nav.Link
+						as={NavLink}
+						to='/'
+						className='nav-link'
+						style={{ color: 'black' }}>
 						Alla Auktioner
 					</Nav.Link>
 				</Nav.Item>
 				<Nav.Item>
-					<Nav.Link as={NavLink} to='/sell' activeClassName='active'>
+					<Nav.Link
+						as={NavLink}
+						to='/sell'
+						className='nav-link'
+						style={{ color: 'black' }}>
 						Lägg till ny Auktion
 					</Nav.Link>
 				</Nav.Item>
 			</Nav>
-
 			<Routes>
 				<Route
 					path='/'
