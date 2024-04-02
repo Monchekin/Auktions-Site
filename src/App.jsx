@@ -18,7 +18,7 @@ function App() {
 				<u>Det bästa Auktionerna.se</u>
 			</h1>
 
-			<Nav variant='tabs' defaultActiveKey='/' style={{ marginLeft: '35%' }}>
+			<Nav variant='tabs' defaultActiveKey='/' style={{ marginLeft: '26%' }}>
 				<Nav.Item style={{ color: 'black' }}>
 					<Nav.Link
 						as={NavLink}
