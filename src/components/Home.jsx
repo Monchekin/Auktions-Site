@@ -32,13 +32,6 @@ const Home = ({ auctions, setAuctions }) => {
 		getAuctions();
 	}, []);
 
-	const getExpiredAuctions = (auctionsData) => {
-		const expiredAuctions = auctionsData.filter(
-			(ad) => new Date(ad.EndDate) < new Date()
-		);
-		setExpiredAuctions(expiredAuctions);
-	};
-
 	// Funktion för att navigera till auktionssidan när en auktion klickas på
 	const navigateToAuctionRoute = (auction) => {
 		navigate(`/auktion/${auction.AuctionID}`, {
@@ -81,10 +74,10 @@ const Home = ({ auctions, setAuctions }) => {
 					gap: '1rem',
 					width: 'calc(80% - 1rem)',
 					height: '20%',
-					marginTop:'2.8%'
+					marginTop: '2.6%'
 				}}>
 				{auctions ? (
-					auctions.map((auction) => (
+					[...auctions].reverse().map((auction) => (
 						<Card
 							key={auction.AuctionID}
 							onClick={() => navigateToAuctionRoute(auction)}
@@ -99,14 +92,19 @@ const Home = ({ auctions, setAuctions }) => {
 									<div
 										style={{
 											display: 'flex',
-											justifyContent: 'space-between',
-											alignItems: 'center'
+											justifyContent: 'space-between'
 										}}>
-										<div>
-											<b>
-												<u>{auction.Title}</u>
-											</b>
-										</div>
+										<Card.Title
+											style={{
+												margin: '0 auto'
+											}}>
+											<span>
+												<b>
+													<u>{auction.Title}</u>
+												</b>
+											</span>
+										</Card.Title>
+
 										<div>
 											<Button
 												variant='danger'
@@ -121,7 +119,10 @@ const Home = ({ auctions, setAuctions }) => {
 									<span>
 										<b>Startpris: </b>
 										<span
-											style={{ color: 'darkred', textDecoration: 'underline' }}>
+											style={{
+												color: 'darkred',
+												textDecoration: 'underline'
+											}}>
 											{auction.StartingPrice} kr
 										</span>
 									</span>
@@ -147,33 +148,35 @@ const Home = ({ auctions, setAuctions }) => {
 					<b>Avslutade Auktioner:</b>{' '}
 				</h5>
 				{expiredAuctions.length > 0 ? (
-					expiredAuctions.map((auction) => (
-						<Card
-							key={auction.AuctionID}
-							style={{
-								marginBottom: '10px',
-								opacity: '80%',
-								backgroundColor: 'lightgray',
-								minWidth: '300px',
-								flexBasis: '100%'
-							}}>
-							<Card.Title>
-								<p style={{ marginTop: '5%', marginBottom: '-5%' }}>
-									<b>{auction.Title}</b>
-								</p>
-							</Card.Title>
-							<Card.Body>
-								<span>
-									<b>Auktionen Avslutades: </b>
-									{formatDate(auction.EndDate)}
-								</span>
-								<br />
-								<span style={{ color: 'red', fontWeight: 'bold' }}>
-									Auktionen är avslutad
-								</span>
-							</Card.Body>
-						</Card>
-					))
+					expiredAuctions
+						.sort((a, b) => new Date(b.EndDate) - new Date(a.EndDate))
+						.map((auction) => (
+							<Card
+								key={auction.AuctionID}
+								style={{
+									marginBottom: '10px',
+									opacity: '80%',
+									backgroundColor: 'lightgray',
+									minWidth: '300px',
+									flexBasis: '100%'
+								}}>
+								<Card.Title>
+									<p style={{ marginTop: '5%', marginBottom: '-5%' }}>
+										<b>{auction.Title}</b>
+									</p>
+								</Card.Title>
+								<Card.Body>
+									<span>
+										<b>Auktionen Avslutades: </b>
+										{formatDate(auction.EndDate)}
+									</span>
+									<br />
+									<span style={{ color: 'red', fontWeight: 'bold' }}>
+										Auktionen är avslutad
+									</span>
+								</Card.Body>
+							</Card>
+						))
 				) : (
 					<p>Inga klara auktioner.</p>
 				)}

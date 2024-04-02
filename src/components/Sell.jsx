@@ -58,7 +58,8 @@ const Sell = () => {
 				throw new Error('Något gick fel vid tillägg av auktionen');
 			}
 			console.log('Auktion tillagd');
-			setMessage('Auktion tillagd'); // Uppdatera meddelandetillståndsvariabeln
+			<br />;
+			setMessage('Auktionen är tillagd'); // Uppdatera meddelandetillståndsvariabeln
 			resetAuction();
 		} catch (error) {
 			console.error(error);
@@ -145,7 +146,7 @@ const Sell = () => {
 						<Button onClick={handleSellSubmit}>Lägg till auktion</Button>
 						{formError && <p style={{ color: 'red' }}>{formError}</p>}{' '}
 						{/* Visa felmeddelande om formuläret är ogiltigt */}
-						{message && { message }} {/* Visa meddelandet om det finns */}
+						{message && message.length && <>{message}</>}
 					</Form>
 				</Card.Body>
 			</Card>
