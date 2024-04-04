@@ -73,9 +73,13 @@ const Home = ({ auctions, setAuctions }) => {
 			setAuctions(updatedAuctions);
 		  } else {
 			console.error('Failed to delete auction!');
+			// Add error message to alert user
+			alert('Failed to delete auction. Please try again later.');
 		  }
 		} catch (error) {
 		  console.error('Error:', error);
+		  // Add error message to alert user
+		  alert('An error occurred. Please try again later.');
 		}
 	  };
 	  
