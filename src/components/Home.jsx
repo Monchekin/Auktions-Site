@@ -46,7 +46,6 @@ const Home = ({ auctions, setAuctions }) => {
 	const formatDate = (dateString) => {
 		const date = new Date(dateString);
 		return date.toLocaleDateString('sv-SE');
-	};
 
 
 	const handleOnDelete = async (auctionId, e) => {
@@ -83,6 +82,36 @@ const Home = ({ auctions, setAuctions }) => {
 		}
 	  };
 	  
+	const handleOnDelete = async (auctionId, e) => {
+        e.stopPropagation(); // Stop event propagation
+        try {
+          const response = await fetch('https://auctioneer.azurewebsites.net/auction/j5t/' + auctionId, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              GroupCode: 'j5t',
+              AuctionID: auctionId
+            })
+          });
+          if (response.ok) {
+            console.log('Auction deleted!');
+            // Perform delete operation based on auctionId
+            console.log('Delete auction with ID:', auctionId);
+            // Filter out the auction with the specified AuctionID
+            const updatedAuctions = auctions.filter(
+              (auction) => auction.AuctionID !== auctionId
+            );
+            setAuctions(updatedAuctions);
+          } else {
+            console.error('Failed to delete auction!');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+
 
 	return (
 		<div
